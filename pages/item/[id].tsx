@@ -27,7 +27,7 @@ export default function Product() {
 
     return (
         <div className="flex-grow items-center my-3 p-3 bg-slate-300 rounded">
-            <div className="max-w-[80%] overflow-y-auto w-full h-full flex flex-col md:flex-row m-auto items-center gap-4 md:gap-12">
+            <div className="max-w-[80%] overflow-y-auto w-full h-full flex flex-col sm:flex-row m-auto items-center gap-4 sm:gap-12">
                 <div className="h-full w-full relative min-h-[300px]">
                     {
 
@@ -40,14 +40,14 @@ export default function Product() {
                         />
                     }
                 </div>
-                <div className="md:w-[50%] border-t md:border-none border-slate-400">
+                <div className="sm:w-[50%] border-t sm:border-none border-slate-400">
                     <h1 className="my-3 font-semibold text-xl">{product?.name}</h1>
                     <div className='my-2'>
                         <h2 className="font-semibold text-lg">PRECIO POR UNIDAD: {formatter(product?.price || 0)}</h2>
                         <div>
                             <QuantitySelector value={value} setValue={setValue}/>
                             <button
-                                className="bg-red-400 p-4 md:p-2 rounded font-semibold text-sm w-full md:w-auto md:text-md mt-3 transition-colors hover:bg-red-500 select-none"
+                                className="bg-red-400 p-4 sm:p-2 rounded font-semibold text-sm w-full sm:w-auto sm:text-md mt-3 transition-colors hover:bg-red-500 select-none"
                                 onClick={() => product && addItem(product, value)}
                             >SUMAR AL CARRITO</button>
                         </div>
