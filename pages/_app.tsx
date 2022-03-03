@@ -7,24 +7,30 @@ import initAuth from '../initAuth';
 import Footer from 'components/Footer'
 import SnackProvider from 'components/providers/SnackProvider'
 import DataProvider from 'components/providers/DataProvider'
+import Head from 'next/head'
 
 initAuth();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <DataProvider>
-        <SnackProvider>
-          <CartProvider>
-            <Header/>
-            <div className="flex-grow flex flex-col">
-              <Component {...pageProps} />
-            </div>
-            <Footer />
-          </CartProvider>
-        </SnackProvider>
-      </DataProvider>
-    </Layout>
+    <>
+      <Head>
+        <title>Arneses electricos</title>
+      </Head>
+      <Layout>
+        <DataProvider>
+          <SnackProvider>
+            <CartProvider>
+              <Header/>
+              <div className="flex-grow flex flex-col">
+                <Component {...pageProps} />
+              </div>
+              <Footer />
+            </CartProvider>
+          </SnackProvider>
+        </DataProvider>
+      </Layout>
+    </>
   )
 }
 

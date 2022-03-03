@@ -26,31 +26,27 @@ function Header() {
                 <div className='flex items-center gap-3'>
                 {
                     !user.id ? (
-                        <>
-                            <Link href='/login' passHref>
-                                <Button>
-                                    <a className="flex items-center gap-3"><p className="hidden md:inline">INGRESA</p><FaUser/></a>
-                                </Button>
-                            </Link>
-                        </>
-                    ) : (
-                        <>
-                            <Button onClick={user.signOut}>
-                                <div className="flex items-center gap-2">
-                                    <p className='font-semibold p-1 whitespace-nowrap hidden md:inline'>{user.displayName || user.email}</p>
-                                    <p className="inline md:hidden">{user.displayName ? user.displayName[0] : user.email![0] }</p>
-                                    <FaUser />
-                                </div>
+                        <Link href='/login' passHref>
+                            <Button>
+                                <a className="flex items-center gap-3"><p className="hidden md:inline">INGRESA</p><FaUser/></a>
                             </Button>
-                            <Link href='/cart' passHref>
-                                <a className="relative p-2 rounded-full hover:bg-slate-200">
-                                    <div className='rounded-full bg-slate-500 text-center w-[17px] h-[17px] absolute bottom-0 left-0'><p className="text-xs font-semibold text-white">{items.length}</p></div>
-                                    <FaShoppingCart size={23}/>
-                                </a>
-                            </Link>
-                        </>
+                        </Link>
+                    ) : (
+                        <Button onClick={user.signOut}>
+                            <div className="flex items-center gap-2">
+                                <p className='font-semibold p-1 whitespace-nowrap hidden md:inline'>{user.displayName || user.email}</p>
+                                <p className="inline md:hidden">{user.displayName ? user.displayName[0] : user.email![0] }</p>
+                                <FaUser />
+                            </div>
+                        </Button>
                     )
                 }
+                <Link href='/cart' passHref>
+                    <a className="relative p-2 rounded-full hover:bg-slate-200">
+                        <div className='rounded-full bg-slate-500 text-center w-[17px] h-[17px] absolute bottom-0 left-0'><p className="text-xs font-semibold text-white">{items.length}</p></div>
+                        <FaShoppingCart size={23}/>
+                    </a>
+                </Link>
                 </div>
             </div>
         </div>

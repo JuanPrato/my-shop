@@ -7,7 +7,7 @@ import { CartItem } from "shared/types/CartItem";
 import Button from "components/utils/Button";
 import Loading from "components/utils/Loading";
 import useFormatter from "hooks/useFormatter";
-import { AuthAction, withAuthUser, withAuthUserSSR } from "next-firebase-auth";
+import { AuthAction, useAuthUser, withAuthUser, withAuthUserSSR } from "next-firebase-auth";
 
 const Cart: NextPage = () => {
 
@@ -15,6 +15,7 @@ const Cart: NextPage = () => {
     const [mercadopago, setMercadopago] = useState<any>();
     const [loading, setLoading] = useState(false);
     const formatter = useFormatter();
+    const user = useAuthUser();
 
     async function generateInvoice(mercadopago: any) {
 
@@ -74,15 +75,19 @@ const Cart: NextPage = () => {
                                 <h2 className="font-semibold text-lg">{formatter(total)}</h2>
                             </div>
                             <div className="cho-container grid place-content-center pr-2">
-                                <Button onClick={() => generateInvoice(mercadopago)}>
-                                    {
-                                        loading ? (
-                                            <div className="p-3"><Loading /></div>
-                                        ) : (
-                                            <button className="font-semibold py-2 whitespace-nowrap">CONTINUAR CON EL PAGO</button>
-                                        )
-                                    }
-                                </Button>
+                                {
+                                    !!user.id && (
+                                        <Button onClick={() => generateInvoice(mercadopago)}>
+                                            {
+                                                loading ? (
+                                                    <div className="p-3"><Loading /></div>
+                                                ) : (
+                                                    <button className="font-semibold py-2 whitespace-nowrap">CONTINUAR CON EL PAGO</button>
+                                                )
+                                            }
+                                        </Button>
+                                    )
+                                }
                             </div>
                         </div>
                     )
@@ -93,9 +98,6 @@ const Cart: NextPage = () => {
 
 }
 
-export default withAuthUser({
-    whenUnauthedBeforeInit: AuthAction.REDIRECT_TO_LOGIN,
-    whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN
-})(Cart);
+export default withAuthUser()(Cart);
 
 export const getServerSideProps = withAuthUserSSR()();
