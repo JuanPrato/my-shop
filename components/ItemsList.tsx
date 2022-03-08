@@ -20,7 +20,7 @@ export default function ItemsList({ items, onFilterChange, categories }: Props) 
     }, [items]);
 
     function onSearch(searchTerm: string) {
-        setItemsToShow(items.filter(i => i.name.includes(searchTerm)));
+        setItemsToShow(items.filter(i => i.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())));
     }
 
     return (
